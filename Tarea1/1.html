@@ -1,0 +1,37 @@
+<script>
+    class Usuario{
+        constructor(nombre,apellido,libros,mascotas){
+            this.nombre=nombre
+            this.apellido=apellido
+            this.libros=libros
+            this.mascotas=mascotas
+        }    
+        getFullName(){
+            return `${this.nombre} ${this.apellido}`
+        }
+        addMascota(mascota){
+            this.mascotas=[...this.mascotas,mascota]
+        }
+        getMascotas(){
+            return this.mascotas.length
+        }
+        addBook(book,autor){
+            this.libros=[...this.libros,{nombre:book,autor:autor}]
+        }
+        getBooks(){
+            return this.libros
+        }
+    }
+
+    var daniel = new Usuario("Daniel","Sierra",[{nombre:"libro1", autor:"autor1"},{nombre:"libro2", autor:"autor2"}],["perro","gato","pajaro"])
+
+    
+    console.log(daniel)    
+    console.log(daniel.getFullName())
+    daniel.addMascota("elefante")
+    console.log(daniel.mascotas)
+    console.log(daniel.mascotas.length)
+    daniel.addBook("cien años de soledad","Gabriel Garcia Marquez")
+    console.log(daniel.getBooks())
+
+</script>

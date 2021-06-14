@@ -15,7 +15,7 @@ router.get('/',(request,response)=>{
 
 router.get('/listar',(request,response)=>{
     try{
-        response.json({'items':instancia.read()})
+        response.json(instancia.read())
     }catch (error){
         response.json({"error": "Intente de nuevo más tarde"})
     }    
@@ -33,7 +33,7 @@ router.get('/listar/:id',(request,response)=>{
 router.post('/guardar',(request,response)=>{
     try{
         let producto=request.body
-        return response.json({"inserción":{"producto": producto}, "resultado": {"productos": instancia.write(producto)}})
+        return response.json(instancia.write(producto))
     }catch (error){
         response.json({"error": "Intente de nuevo más tarde"})
     } 
@@ -43,7 +43,7 @@ router.post('/guardar',(request,response)=>{
 router.put('/editar/:id',(request,response)=>{
     try{
         let producto=request.body
-        return response.json({"edición":{"producto": producto}, "resultado": {"productos": instancia.edit(producto,request.params.id)}})
+        return response.json(instancia.edit(producto,request.params.id))
     }catch (error){
         response.json({"error": "Intente de nuevo más tarde"})
     }   
@@ -53,7 +53,7 @@ router.put('/editar/:id',(request,response)=>{
 router.delete('/eliminar/:id',(request,response)=>{
     console.log(request.params.id) 
     try{
-        return response.json({"resultado": {"productos": instancia.delete(request.params.id)}})
+        return response.json(instancia.delete(request.params.id))
     }catch (error){
         response.json({"error": "Intente de nuevo más tarde"})
     }   

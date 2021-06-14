@@ -6,8 +6,9 @@ app.use(express.urlencoded({extended:true}))
 
 /*MIDDLEWARE*/
 const middleware = (req,res,next) => {
-    if(isNaN(req.query.num1) || isNaN(req.query.num2))
-    return res.status(400).send('Ingrese valores numéricos')
+    if(isNaN(req.query.num1) || isNaN(req.query.num2)){
+        return res.status(400).send('Ingrese valores numéricos')
+    }   
     next();
 }
 

@@ -38,8 +38,10 @@ class Productos {
     edit(objeto, id) {
         try{
             const productos=JSON.parse(fs.readFileSync(this.fileName,'utf-8'))
-            objeto.id=parseInt(id)
-            productos[parseInt(id-1)]=objeto
+            let producto=productos.find(x => x.id == parseInt(id));
+            producto.title = objeto.title
+            producto.price = objeto.price
+            producto.thumbnail = objeto.thumbnail
             try{
                 fs.writeFileSync(this.fileName,JSON.stringify(productos))
                 try{
@@ -54,6 +56,7 @@ class Productos {
             console.log(error)
         }
     }
+
     delete(id) {
         try{
             let productos=JSON.parse(fs.readFileSync(this.fileName,'utf-8'))

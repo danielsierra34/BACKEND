@@ -1,0 +1,22 @@
+extends layout
+block partial
+    h1="Vista de Productos"
+    br
+    if hayProductos
+        div.table-responsive
+            table.table.table-dark 
+                tr 
+                    th="Nombre"
+                    th="Precio"
+                    th="Foto"
+                tbody
+                    each val, index in productos 
+                        tr
+                            td=val.title  
+                            td=val.price
+                            td
+                                img(width="60", src=val.thumbnail) 
+    else
+        h3.alert.alert-warning="No se encontraron productos"
+
+    a(href="/api")="Regresar"

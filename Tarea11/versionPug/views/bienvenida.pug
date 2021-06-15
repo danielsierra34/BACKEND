@@ -1,0 +1,12 @@
+extends layout
+block partial
+    div.jumbotron
+        h1="Bienvenido"
+        br
+        p="¿Qué deseas hacer?"
+        ul
+            li
+                a(href="/api/vista")="Lista de Productos"
+            li
+                a(href="/api/crear")="Crear un producto"
+

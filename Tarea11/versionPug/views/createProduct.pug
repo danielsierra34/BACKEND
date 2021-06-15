@@ -1,0 +1,17 @@
+extends layout
+block partial
+    h1="Creación de Productos"
+    br
+    form(action='/api/guardar', method='POST')
+        div.form-group
+            label="Nombre"
+            input(type="text" id="nombre" name="title" placeholder="").form-control
+        div.form-group
+            label="Precio"
+            input(type="text" id="precio" name="price" placeholder="").form-control
+        div.form-group
+            label="Thumbnail"
+            input(type="text" id="nombre" name="thumbnail" placeholder="" value="https://picsum.photos/200").form-control
+        input(type="submit", value="Crear").btn.btn-default
+
+    a(href="/api")="Regresar" 

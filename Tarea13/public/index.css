@@ -1,0 +1,15 @@
+.table td, .table th {
+    vertical-align: middle;
+}
+h1 {
+    color: blue;
+}
+hr {
+    background-color: #ddd;
+}
+.jumbotron {
+   height: auto;
+   padding-right: 10px !important;
+   padding-left: 10px !important;
+}
+ 

@@ -1,0 +1,70 @@
+.table td, .table th {
+    vertical-align: middle;
+}
+h1 {
+    color: blue;
+}
+hr {
+    background-color: #ddd;
+}
+.jumbotron {
+   height: auto;
+   padding-right: 10px !important;
+   padding-left: 10px !important;
+}
+
+#productos{
+    max-width: 100%;
+    overflow: auto;
+}
+.listaProductos{
+    white-space: nowrap;
+}
+.listaProductos li{
+    display:inline-block;
+    background-color:white;
+    width:120px;
+    margin:8px;
+    border-radius:8px;
+    text-align:center;
+    padding:6px;
+}
+hr{
+    margin:0
+}
+#mensajes{
+    border:1px solid grey;
+    width: 100ox;
+    height: 300px;
+    overflow-y:auto;
+    background-color: white;
+    margin-top: 50px;
+}
+.listaMensajes{
+    padding: 0;
+}
+.listaMensajes li{
+    width: 100%;
+}
+
+
+
+
+
+
+
+.mensajeEmail{
+    font-weight: bold;
+    color:blue;
+}
+.mensajeMensaje{
+    color:green;
+    font-style: italic;
+}
+.mensajeDateTime{
+    color:brown;
+}
+
+#alertaProductos,#alertaMensajes{
+    display: none;
+}

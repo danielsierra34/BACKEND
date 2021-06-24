@@ -1,0 +1,28 @@
+{
+  "name": "tarea14",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "ServerES6toJS5": "node_modules/.bin/babel ./server.es6.js -o ./server.js -w",
+    "ServerTStoJS5": "node_modules/.bin/tsc ./server.ts -w",
+    "babel-typescript": "node_modules/.bin/tsc ./ejercicios/2/index.ts -w",
+    "babel-color": "node_modules/.bin/babel ./ejercicios/1/origen.js -o ./ejercicios/1/destino.js -w",
+    "babel": "node_modules/.bin/babel ./origen.js -o ./destino.js -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.2",
+    "socket.io": "^4.1.2",
+    "typescript": "^4.3.4"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-runtime": "^6.26.0"
+  }
+}

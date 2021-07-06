@@ -57,6 +57,35 @@ formProducto.addEventListener('submit', event => {
     }
 });
 
+function removeFromCart(id){
+    if ( window.confirm("Está seguro de eliminar este item de su carrito?")) {
+        fetch(`/api/carrito/eliminar/${id}`, {
+            method: 'DELETE',
+        }).then(            
+            respuesta => console.log(respuesta.text())
+        ).then(productos => {
+            socket.emit('agregado', 'ok');
+            alert("producto eliminado")
+        }).catch(error => {
+            console.log('ERROR', error);
+        });
+    }
+}
+
+/*function changeQuantity(id,quantity){
+    console.log(id , quantity)
+    fetch(`/api/carrito/modificar/${id}`, {
+        method: 'PUT',
+    }).then(        
+        respuesta => console.log(respuesta.text())
+    ).then(productos => {
+        socket.emit('agregado', 'ok');
+        alert("producto actualizado")
+    }).catch(error => {
+        console.log('ERROR', error);
+    });
+}*/
+
 /*const formMensaje = document.getElementById('formCreacionMensaje');
 formMensaje.addEventListener('submit', event => {
     event.preventDefault();
@@ -98,7 +127,6 @@ formMensaje.addEventListener('submit', event => {
     }
 });*/
 const classname = document.getElementsByClassName("formProductoAgregar");
-
 for (var i = 0; i < classname.length; i++) {
     classname[i].addEventListener('submit', function(e) {
         e.preventDefault();
@@ -171,23 +199,31 @@ function cartItemTemplate(productos) {
         {{#if productos.length}} 
         <ul id="shoppingCart">
             {{#each productos}}
-                <li class="thumbnail">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <b>{{this.title}}</b>
-                            </div>
-                            <div class="col-md-6 noPaddingx">
-                                <img width="60px" src={{this.thumbnail}} alt="not found">
-                            </div>
-                            <div class="col-md-6">
-                                
-                                <p>
-                                    $ {{this.price}}
-                                </p>
-                            </div>
+                <li class="thumbnail container-fluid">
+                    <div class="row-fluid">
+                        <div class="col-xs-12 text-right noPaddingX">
+                            
                         </div>
-                    </div>                
+                        <div class="col-xs-12 noPaddingX">
+                            <div class="delete pull-right" onclick="removeFromCart({{this.id}})">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </div>
+                            <b>{{this.title}}</b>
+                        </div>
+                        <div class="col-xs-6 noPaddingX">
+                            <img width="60px" src={{this.thumbnail}} alt="not found">
+                        </div>
+                        <div class="col-xs-6 noPaddingX">
+                            $ {{this.total}}
+                        <!--<div>$ {{this.price}}</div>
+                            <div>x</div>
+                            <input type="number" onchange="changeQuantity({{this.id}},this.value)" class="inputpeq" value="0" name="quantity">-->                           
+                        </div>
+                        <!--<div class="col-md-12">
+                            <hr>
+                            
+                        </div>-->
+                    </div>        
                 </li>
             {{/each}}
         </ul>

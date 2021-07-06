@@ -14,9 +14,12 @@ const instanciaCarrito = new Carrito("carrito.txt");
 
 const io = require('socket.io')(http)
 
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
+
 
 app.engine('hbs',handlebars({ 
     extname: '.hbs',

@@ -22,11 +22,12 @@ class Carrito {
 
     write(objeto) {
         try{
-            const item=instanciaProductos.read(objeto.id)
-            
+            const item=instanciaProductos.read(objeto.id)            
             const carrito=JSON.parse(fs.readFileSync(this.fileName,'utf-8'))
             item[0].idx=carrito.length
             item[0].quantity=parseInt(objeto.quantity)
+            item[0].total=parseInt(objeto.quantity)*item[0].price
+            item[0].timestamp=new Date().toLocaleString();
             carrito.push(item[0])
             try{
                 fs.writeFileSync(this.fileName,JSON.stringify(carrito))

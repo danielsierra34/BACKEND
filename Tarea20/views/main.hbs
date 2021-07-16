@@ -1,0 +1,39 @@
+    <h3 class="text-center">Vista de Productos</h3>
+    <br>
+    {{#if hayProductos}} 
+        <div class="row"> 
+                {{#each productos}}
+                    <div class="col-sm-4 col-md-3">
+                        <div class="thumbnail">
+                            <form class="formProductoAgregar">
+                                <img width="100%" src="{{this.thumbnail}}" alt="...">
+                                <div class="caption">
+                                    <h4 class="text-center">{{this.title}}</h4>
+                                    <p class="line-clamp">{{this.description}}</p>                                    
+                                    <div class="price text-center">
+                                    ${{this.price}}
+                                    </div>
+                                    <hr>
+                                    <p class="small">Selecciona una cantidad:</p>
+                                    <div class="text-center">                                       
+                                        <input type="number" class="inputpeq" value="0" name="quantity">
+                                        <div class="small">
+                                            de <br> {{this.stock}} Disponibles
+                                        </div>
+                                        <br>
+                                        <div class="idProducto hide">
+                                        <input type="text" value="{{this.id}}" name="id">
+                                    </div>
+                                    <div id="alertaProductos" class="alert small"></div>                           
+                                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></button> 
+                                    </div> 
+                                    <br>                              
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                {{/each}}
+        </div>
+    {{else}}  
+        <h3 class="alert alert-warning">No se encontraron productos</h3>
+    {{/if}}

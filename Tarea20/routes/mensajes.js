@@ -3,25 +3,28 @@ const router = express.Router();
 const controlador = require('../api/mensajes');
 
 router.get('/',(request,response)=>{
-    response.redirect('mensajes/listar')
-}) 
+    response.redirect('/')
+})
 
+//se ejecuta el metodo de listar
 router.get('/listar',async(request,response) => { 
     try{
-        response.json({'items':await controlador.listar()})
+        response.json(await controlador.listar())
     }catch (error){
         response.json({"error": "Intente de nuevo más tarde"})
     }   
 })
 
+//se ejecuta el metodo de listar por id
 router.get('/buscar/:id',async(request,response)=>{
     try{
-        response.json({'item':await controlador.buscar(request.params.id)})
+        response.json(await controlador.buscar(request.params.id))
     }catch (error){
         response.json({"error": "Intente de nuevo más tarde"})
     }    
 })
 
+//se ejecuta el metodo de agregar
 router.post('/agregar',(request,response)=>{    
     try{
         let mensaje=request.body
@@ -31,6 +34,7 @@ router.post('/agregar',(request,response)=>{
     }     
 })
 
+//se ejecuta el metodo de eliminar por id
 router.get('/eliminar/:id',async(request,response)=>{
     try{
         await controlador.eliminar(request.params.id)

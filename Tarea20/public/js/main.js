@@ -1,9 +1,9 @@
 let socket = io.connect()
 
-/*socket.on('productos', data => {
+socket.on('productos', data => {
     console.log("se listan los productos en el cliente")
     document.getElementById('productos').innerHTML = productTemplate(data.reverse())
-})*/
+})
 
 socket.on('mensajes', data => {
     console.log("se listan los mensajes en el cliente")
@@ -13,11 +13,6 @@ socket.on('mensajes', data => {
 socket.on('carrito', data => {
     console.log("se muestra el carrito de compras al usuario")
     document.getElementById('shoppingCartContainer').innerHTML = cartItemTemplate(data.reverse())
-})
-
-socket.on('productos', data => {
-    console.log("se muestra el carrito de compras al usuario")
-    location.reload();
 })
 
 const formProducto = document.getElementById('formCreacionProducto');
@@ -108,7 +103,7 @@ formMensaje.addEventListener('submit', event => {
             body: JSON.stringify(json)
         }).then(respuesta => respuesta.text()).then(mensajes => {
             formMensaje.reset();
-            socket.emit('mensajes', 'ok');
+            socket.emit('mensajeCreado', 'ok');
             alerta.style.display = "block";
             alerta.innerHTML = "Felicidades se ha enviado tu mensaje"
             alerta.className = '';
@@ -173,26 +168,45 @@ for (var i = 0; i < classname.length; i++) {
     }, false);
 }
 
-
 function productTemplate(productos) {
     const plantilla = `
-        {{#if productos.length}} 
-        <ul class="listaProductos">
+    {{#if hayProductos}} 
+    <div class="row"> 
             {{#each productos}}
-                <li>
-                    <b>{{this.title}}</b>
-                    <hr>
-                    <div>
-                        <img width="100%" src={{this.thumbnail}} alt="not found">
+                <div class="col-sm-4 col-md-3">
+                    <div class="thumbnail">
+                        <form class="formProductoAgregar">
+                            <img width="100%" src="{{this.thumbnail}}" alt="...">
+                            <div class="caption">
+                                <h4 class="text-center">{{this.title}}</h4>
+                                <p class="line-clamp">{{this.description}}</p>                                    
+                                <div class="price text-center">
+                                $ {{this.price}}
+                                </div>
+                                <hr>
+                                <p class="small">Selecciona una cantidad:</p>
+                                <div class="text-center">                                       
+                                    <input type="number" class="inputpeq" value="0" name="quantity">
+                                    <div class="small">
+                                        de <br> {{this.stock}} Disponibles
+                                    </div>
+                                    <br>
+                                    <div class="idProducto hide">
+                                    <input type="text" value="{{this.id}}" name="id">
+                                </div>
+                                <div id="alertaProductos" class="alert small"></div>                           
+                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></button> 
+                                </div> 
+                                <br>                              
+                            </div>
+                        </form>
                     </div>
-                    <p>
-                        $ {{this.price}}
-                    </p>                
-                </li>
+                </div>
             {{/each}}
-        </ul>
-
-        {{/if}}
+    </div>
+{{else}}  
+    <h3 class="alert alert-warning">No se encontraron productos</h3>
+{{/if}}
     `
 
     var template = Handlebars.compile(plantilla);

@@ -3,11 +3,7 @@ const app = express()
 const handlebars = require('express-handlebars')
 const http = require('http').Server(app)
 
-
-
-
-
-const instanciaProductos = require('./api/productos')
+const instanciaProductos = require('./api/productos');
 
 const instanciaMensajes = require('./api/mensajes');
 
@@ -38,14 +34,10 @@ io.on('connection', async socket => {
     let mensajes = await instanciaMensajes.listar()
     socket.emit('mensajes',mensajes);
 
-    //Escucho los mensajes enviado por el cliente y se los propago a todos
-    socket.on('update', data => {
-        //io.sockets.emit('productos', productos.listar());
-        /*io.sockets.emit('productos',instanciaProductos.read());
-        console.log("se creo un nuevo producto")*/
-    });
+    let productos = await instanciaProductos.listar()
+    socket.emit('productos',productos);
 
-    socket.on('mensajes', async data => {
+    socket.on('mensajeCreado', async data => {
         console.log("llego un mensaje")
         let mensajes= await instanciaMensajes.listar()
         io.sockets.emit('mensajes',mensajes);
@@ -56,13 +48,19 @@ io.on('connection', async socket => {
         let productos= await instanciaProductos.listar()
         io.sockets.emit('productos',productos);
     });
+    socket.on('productoActualizado', async data => {
+        console.log("Se creo un producto")
+        let productos= await instanciaProductos.listar()
+        io.sockets.emit('productos',productos);
+    });
 
-    socket.on('agregado', async data => {
+    socket.on('carritoAgregado', async data => {
         console.log("se agrego un producto")
         socket.emit('carrito',await instanciaCarrito.listar());
         /*io.sockets.emit('mensajes',instanciaMensajes.read());*/
     });
-    socket.on('eliminado', async data => {
+
+    socket.on('carritoEliminado', async data => {
         console.log("se elimino un producto del carrito")
         socket.emit('carrito',await instanciaCarrito.listar());
         /*io.sockets.emit('mensajes',instanciaMensajes.read());*/

@@ -3,25 +3,28 @@ const router = express.Router();
 const controlador = require('../api/carrito');
 
 router.get('/',(request,response)=>{
-    response.redirect('carrito/listar')
-}) 
+    response.redirect('/')
+})
 
+//se ejecuta el metodo de listar
 router.get('/listar',async(request,response) => { 
     try{
-        response.json({'items':await controlador.listar()})
+        response.json(await controlador.listar())
     }catch (error){
         response.json({"error": "Intente de nuevo más tarde"})
     }   
 })
 
+//se ejecuta el metodo de listar por id
 router.get('/buscar/:id',async(request,response)=>{
     try{
-        response.json({'item':await controlador.buscar(request.params.id)})
+        response.json(await controlador.buscar(request.params.id))
     }catch (error){
         response.json({"error": "Intente de nuevo más tarde"})
     }    
 })
 
+//se ejecuta el metodo de agregar
 router.post('/agregar',(request,response)=>{    
     try{
         let item=request.body
@@ -31,8 +34,8 @@ router.post('/agregar',(request,response)=>{
     }     
 })
 
+//se ejecuta el metodo de eliminar por id
 router.get('/eliminar/:id',async(request,response)=>{
-    console.log(1)
     try{
         console.log(request.params.id)
         await controlador.eliminar(request.params.id)

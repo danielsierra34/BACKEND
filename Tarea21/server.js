@@ -7,7 +7,7 @@ const http = require('http').Server(app)
 //global.persistencia="firebase"
 //global.persistencia="mongoDBAAS"
 //global.persistencia="mongoLOCAL" //listo
-//global.persistencia="mysqlDBAAS"
+global.persistencia="mysqlDBAAS"
 //global.persistencia="mysqlLOCAL" //listo
 //global.persistencia="sqlite3" //listo
 

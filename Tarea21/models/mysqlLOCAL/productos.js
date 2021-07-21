@@ -1,6 +1,6 @@
 const knex = require('../../database/mysqlLOCAL/knex');
 
-class Productos {
+class ControladorProductos {
 
     constructor() { }
 
@@ -40,4 +40,4 @@ class Productos {
     
 }
 
-module.exports = new Productos();
+module.exports = new ControladorProductos();

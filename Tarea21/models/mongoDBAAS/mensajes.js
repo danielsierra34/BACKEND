@@ -1,49 +1,64 @@
+const mongoose = require('mongoose');
+const url = "mongodb+srv://daniel:carraspunchis@cluster0.igji0.gcp.mongodb.net/ecommerce"
 
-const connection = require('../../database/mongoLOCAL/connection');
+const connection = mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+
+mongoose.connection.on('connected', () => {
+    console.log('[Mongoose] - connected in:', url);
+});
+
+mongoose.connection.on('error', (err) => {
+    console.log('[Mongoose] - error:', err);
+});
 
 const schema = mongoose.Schema({
-    title: { type: String, require: true, max: 100 },
-    price: { type: Number, require: true},
-    thumbnail: { type: String, require: true, max:1000 },
-    id: { type: Number, require: true },
-    stock: { type: Number, require: true},
-    description: { type: String, require: true }
+    email: { type: String, require: true, max: 100 },
+    mensaje: { type: String, require: true, max:1000 },
 }, {strict: true});
 
-const Productos = mongoose.model('productos', schema);
+const Mensajes = mongoose.model('mensajes', schema);
 
-class ControladorProductos{
+
+
+
+class ControladorMensajes{
 
     constructor() { }
 
     async listar() {
         try {
-            return await Productos.find();
+            return await Mensajes.find();
         } catch (error) {
             throw error;
         }
     }
     async buscar(id) {
         try {
-            return await Productos.findById(id);
+            return await Mensajes.find({id:parseInt(id)});
         } catch (error) {
             throw error;
         } 
     }
     async agregar(mensaje) {
         try {
-            return await Productos.create(mensaje);
+            return await Mensajes.create(mensaje);
         } catch (error) {
             throw error;
         }
     }
     async eliminar(id) {
         try {
-            return await Productos.findByIdAndDelete(id);
+            return await Mensajes.findByIdAndDelete(id);
         } catch (error) {
             throw error;
         }
     }
 }
 
-module.exports = new ControladorProductos();
+module.exports = new ControladorMensajes();
+
+
+
+
+
+

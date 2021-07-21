@@ -22,9 +22,6 @@ const schema = mongoose.Schema({
 
 const Productos = mongoose.model('productos', schema);
 
-
-
-
 class ControladorProductos{
 
     constructor() { }
@@ -38,7 +35,7 @@ class ControladorProductos{
     }
     async buscar(id) {
         try {
-            return await Productos.findById(id);
+            return await Productos.find({id:parseInt(id)});
         } catch (error) {
             throw error;
         } 

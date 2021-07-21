@@ -31,8 +31,6 @@ class ControladorProductos{
 
     async listar() {
         try {
-            const p=await Productos.find();
-            console.log(p)
             return await Productos.find();
         } catch (error) {
             throw error;
@@ -40,7 +38,7 @@ class ControladorProductos{
     }
     async buscar(id) {
         try {
-            return await Productos.findById(id);
+            return await Productos.find({id:parseInt(id)});
         } catch (error) {
             throw error;
         } 

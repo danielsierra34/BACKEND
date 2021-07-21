@@ -7,13 +7,13 @@ const http = require('http').Server(app)
 //global.persistencia="firebase"
 //global.persistencia="mongoDBAAS"
 //global.persistencia="mongoLOCAL" //listo
-global.persistencia="mysqlDBAAS"
+//global.persistencia="mysqlDBAAS"
 //global.persistencia="mysqlLOCAL" //listo
-//global.persistencia="sqlite3" //listo
+global.persistencia="sqlite3" //listo
 
 const instanciaProductos = require('./api/productos');
 
-//const instanciaMensajes = require('./api/mensajes');
+const instanciaMensajes = require('./api/mensajes');
 
 //const instanciaCarrito = require('./api/carrito');
 
@@ -41,8 +41,8 @@ io.on('connection', async socket => {
     //let carrito = await instanciaCarrito.listar()
     //socket.emit('carrito',carrito);
 
-    //let mensajes = await instanciaMensajes.listar()
-    //socket.emit('mensajes',mensajes);
+    let mensajes = await instanciaMensajes.listar()
+    socket.emit('mensajes',mensajes);
 
     let productos = await instanciaProductos.listar()
     socket.emit('productos',productos);
@@ -89,8 +89,8 @@ app.use((err, req, res, next) => {
 const productosRouter = require('./routes/productos');
 app.use('/api/productos', productosRouter);
 
-//const mensajesRouter = require('./routes/mensajes');
-//app.use('/api/mensajes', mensajesRouter);
+const mensajesRouter = require('./routes/mensajes');
+app.use('/api/mensajes', mensajesRouter);
 
 //const carritoRouter = require('./routes/carrito');
 //app.use('/api/carrito', carritoRouter);

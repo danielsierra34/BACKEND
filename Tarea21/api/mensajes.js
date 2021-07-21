@@ -1,4 +1,4 @@
-const Mensajes = require('../models/mongoLOCAL/mensajes');
+const Mensajes = require(`../models/${global.persistencia}/mensajes`);
 
 class ControladorMensajes{
 

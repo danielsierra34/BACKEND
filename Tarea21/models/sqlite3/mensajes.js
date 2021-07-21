@@ -1,6 +1,6 @@
-const knex = require('../database/knex');
+const knex = require('../../database/sqlite3/knex');
 
-class Mensajes {
+class ControladorMensajes {
 
     constructor() { }
 
@@ -22,7 +22,7 @@ class Mensajes {
     }
     async agregar(mensaje) {
         try {
-            mensaje.dateTime="www"
+            mensaje.dateTime=new Date().toLocaleString();
             let resultado = await knex('mensajes').insert(mensaje);
             return resultado;
         } catch (error) {
@@ -40,4 +40,4 @@ class Mensajes {
     
 }
 
-module.exports = new Mensajes();
+module.exports = new ControladorMensajes();

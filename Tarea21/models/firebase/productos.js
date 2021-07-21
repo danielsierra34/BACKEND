@@ -9,12 +9,11 @@ const db = admin.firestore();
 const query = db.collection('productos');
 
 
-class Productos {
+class ControladorProductos {
 
     constructor() { }
 
     async listar() {
-        console.log("listando")
         try{
             const productos = await query.get()            
             return  productos.docs.map(doc => doc.data())
@@ -23,8 +22,8 @@ class Productos {
         }       
     }
     async buscar(id) {
-        const productos = await query.get()            
-            return  productos.docs.map(doc => doc.data())
+        const productos = await db.collection('productos').where('id','==',parseInt(id)).get()            
+        return productos.docs.map(doc => doc.data())
     }
     async agregar(producto) {
         try{
@@ -51,4 +50,4 @@ class Productos {
     
 }
 
-module.exports = new Productos();
+module.exports = new ControladorProductos();    

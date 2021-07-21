@@ -3,11 +3,21 @@ const app = express()
 const handlebars = require('express-handlebars')
 const http = require('http').Server(app)
 
+//global.persistencia="filesystem" //listo
+//global.persistencia="firebase"
+//global.persistencia="mongoDBAAS"
+//global.persistencia="mongoLOCAL" //listo
+//global.persistencia="mysqlDBAAS"
+//global.persistencia="mysqlLOCAL" //listo
+//global.persistencia="sqlite3" //listo
+
 const instanciaProductos = require('./api/productos');
 
 //const instanciaMensajes = require('./api/mensajes');
 
 //const instanciaCarrito = require('./api/carrito');
+
+console.log(global.persistencia)
 
 const io = require('socket.io')(http)
 

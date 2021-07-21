@@ -1,4 +1,4 @@
-const Productos = require('../models/mongoLOCAL/productos');
+const Productos = require(`../models/${global.persistencia}/productos`);
 
 class ControladorProductos{
 
@@ -16,7 +16,7 @@ class ControladorProductos{
             return await Productos.buscar(id);
         } catch (error) {
             throw error;
-        } 
+        }  
     }
     async agregar(mensaje) {
         try {

@@ -3,6 +3,7 @@ let socket = io.connect()
 socket.on('productos', data => {
     console.log("se listan los productos en el cliente")
     document.getElementById('productos').innerHTML = productTemplate(data.reverse())
+    console.log(JSON.stringify(data))
 })
 
 socket.on('mensajes', data => {

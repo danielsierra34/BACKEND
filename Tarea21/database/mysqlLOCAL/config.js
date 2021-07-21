@@ -4,17 +4,9 @@ const mysql = {
         host: '127.0.0.1',
         user: 'root',
         password: '',
-        database: 'mydb'
+        database: 'ecommerce'
     },
     pool: { min: 0, max: 7 }
 }
 
-const sqlite3 = {
-    client: 'sqlite3',
-    connection: {
-        filename: __dirname + '/proyecto.sqlite'
-    },
-    useNullAsDefault: true
-}
-
-module.exports = sqlite3;
+module.exports = mysql;

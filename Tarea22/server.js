@@ -21,6 +21,7 @@ console.log(global.persistencia)
 
 const io = require('socket.io')(http)
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
@@ -33,7 +34,7 @@ app.engine('hbs',handlebars({
 }))
 
 app.set('view engine', 'hbs')
-app.set('views', __dirname + '/views')   
+app.set('views', __dirname + '/views')    
  
 io.on('connection', async socket => {
     console.log('Nuevo cliente conectado!'); 

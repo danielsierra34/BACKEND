@@ -6,7 +6,7 @@ router.get('/',(request,response)=>{
     response.redirect('/')
 })
 
-router.get('/listare/:cant',async(request,response)=>{
+router.get('/vista-test/:cant',async(request,response)=>{
     try{
         response.render('index',{productos: await controlador.listarRandom(request.params.cant)});
     }catch (error){

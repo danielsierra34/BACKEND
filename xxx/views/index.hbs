@@ -1,0 +1,27 @@
+<div class="container">
+    <h3 class="text-center">Vista de Productos</h3>
+    <br>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Thumbnail</th>
+            <th>Stock</th>
+            <th>Description</th>
+        </tr>
+            {{#each productos}}
+                <tr>
+                    <th>{{this.id}}</th>
+                    <th>{{this.title}}</th>
+                    <th>{{this.price}}</th>
+                    <th> <img width="100%" src="{{this.thumbnail}}" alt="..."></th>
+                    <th>{{this.stock}}</th>
+                    <th>{{this.description}}</th>
+                </tr>  
+            {{/each}}
+
+        
+    </table>
+        
+</div>

@@ -337,7 +337,7 @@ function checkStatus(){
         console.log('ERROR', error);
     });
 }
-
+ 
 function login(json){
     fetch(`/login?username=${json.nombre}`, {
         headers: {

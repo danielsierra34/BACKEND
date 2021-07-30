@@ -48,7 +48,7 @@ app.set('view engine', 'hbs')
 app.set('views', __dirname + '/views')    
 
 app.get('/', (request, response) => {
-    response.send('server')
+    console.log(request.query.username)
 })
 
 //COOKIES
@@ -100,27 +100,43 @@ app.get('/con-session', (request, response) => {
     }
 })
 
-app.get('/logout', (request, response) => {
-    request.session.destroy(err => {
-        if (!err) response.send("Logout ok")
-        else response.send({status:'Logout error',body:err})
-    })    
+app.all('/status', (request, response) => {
+    if(!(request.cookies.username)){
+        request.session.destroy(err => {
+            if (!err) response.json({status:false})
+            else response.json({status:false,body:err})
+        })  
+    }else{
+        response.json({status:true, username:request.session.username})
+    }
 })
 
-app.get('/login', (request, response) => {
-    if(!(request.query.username && request.query.password)){
-        response.send("login failed")
-    }else if(request.query.username=="admin" && request.query.password =="1234"){
-        request.session.user="admin";
-        request.session.admin=true;
-        response.send("login correcto")
+
+app.all('/logout', (request, response) => {
+    request.session.destroy(err => {
+        if (!err) response.clearCookie('username').send({status:true})
+        else response.json({status:false,body:err})
+    })  
+    
+})
+
+app.all('/login', (request, response) => {    
+    if(!(request.query.username)){
+        response.json({status:false})
     }else{
-        response.send("credenciales incorrectas")
+        request.session.username=request.query.username
+        response.cookie('username', request.query.username,{
+             maxAge: 10000
+            }).json({
+                status:true, 
+                username:request.query.username
+            }
+        )
     }
 })
 
 const auth = (request,response,next) => {
-    if(request.session && request.session.user == "admin" && request.session.admin){
+    if(request.session && request.session.username == "admin" && request.session.admin){
         return next();
     }else{
         return response.status(401).send("no autorizado")

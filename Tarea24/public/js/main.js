@@ -1,18 +1,16 @@
+checkStatus()
+
 let socket = io.connect()
 
 socket.on('productos', data => {
-    console.log("se listan los productos en el cliente")
     document.getElementById('productos').innerHTML = productTemplate(data.reverse())
-    console.log(JSON.stringify(data))
 })
 
 socket.on('mensajes', data => {
-    console.log("se listan los mensajes en el cliente")
     document.getElementById('mensajes').innerHTML = messageTemplate(data.reverse())
 })
 
 socket.on('carrito', data => {
-    console.log("se muestra el carrito de compras al usuario")
     document.getElementById('shoppingCartContainer').innerHTML = cartItemTemplate(data.reverse())
 })
 
@@ -57,6 +55,28 @@ formProducto.addEventListener('submit', e => {
         },1500)
     }
 });
+
+const formLogin = document.getElementById('formLogin');
+formLogin.addEventListener('submit', e => {
+    e.preventDefault();    
+    const data = new FormData(e.target);
+    const json = Object.fromEntries(data.entries());
+    const jsonx=JSON.parse(JSON.stringify(json))
+    
+    if(jsonx.nombre){
+        login(jsonx)
+    }else{
+        alerta.style.display = "block";
+        alerta.innerHTML = "Debes ingresar tu nombre"
+        alerta.className = '';
+        alerta.classList.add("alert");
+        alerta.classList.add("alert-danger");
+        setTimeout(function(){
+            alerta.style.display = "none";
+        },1500)
+    }
+});
+
 
 function removeFromCart(id){
     if ( window.confirm("Está seguro de eliminar este item de su carrito?")) {
@@ -281,4 +301,88 @@ function messageTemplate(mensajes) {
     var template = Handlebars.compile(plantilla);
     let html = template({ mensajes: mensajes, hayMensajes: mensajes.length });
     return html;
+}
+
+function checkStatus(){
+    console.log("checking Status")
+    fetch('status', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'POST'
+    }).then(respuesta => respuesta.json()).then(status => {
+        if(status.status){
+            console.log(`${status.username} is logged`)
+            document.querySelectorAll('.logged').forEach(function(el) {
+                el.style.display = 'block';
+             });
+             document.querySelectorAll('.unlogged').forEach(function(el) {
+                el.style.display = 'none';
+             });
+             document.getElementById("nombreUsuario").innerHTML = status.username
+        }else{
+            console.log("nobody is logged")
+            document.querySelectorAll('.logged').forEach(function(el) {
+                el.style.display = 'none';
+             });
+             document.querySelectorAll('.unlogged').forEach(function(el) {
+                el.style.display = 'block';
+             });
+        }
+        setTimeout(() => {
+            checkStatus()
+        }, 5000);
+       
+    }).catch(error => {
+        console.log('ERROR', error);
+    });
+}
+
+function login(json){
+    fetch(`/login?username=${json.nombre}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'POST'
+    }).then(respuesta => respuesta.json()).then(login => {
+        const alerta = document.getElementById("alertaLogin");
+        alerta.className = '';
+        alerta.classList.add("alert");
+        if(login.status){
+            alerta.innerHTML = `Hola ${login.username}, Bienvenido`
+            alerta.classList.add("alert-success");
+            setTimeout(function(){
+                location.reload();
+            },1500)
+        }else{
+            alerta.innerHTML = `usuario no valido`
+            alerta.classList.add("alert-danger");
+        }
+        alerta.style.display = "block";
+        setTimeout(function(){
+            alerta.style.display = "none";
+        },1500)
+       
+    }).catch(error => {
+        alert("error")
+        console.log('ERROR', error);
+    });
+}
+function logout(){
+    fetch(`/logout`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'POST'
+    }).then(respuesta => respuesta.json()).then(logout => {
+        if(logout.status){
+            location.reload();
+        }else{
+
+        }
+        
+    }).catch(error => {
+        alert("error")
+        //console.log('ERROR', error);
+    });
 }

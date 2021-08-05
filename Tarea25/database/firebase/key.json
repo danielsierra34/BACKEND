@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "tienda-de-daniel",
+  "private_key_id": "957a073f622bedb9a4428a2f5c4b43734e25f9b9",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCpywEUGEquYkrC\nj+o93JDGH57by+lsUffKCcbdsBh+DtNC0Nsky6RDYUB20mEIZ/aC6bnLWx7FXzv3\n3FE1pFqjTQeI5S4Ae2f0icVugD8ChZ0w7wnrrn8KqDMe4xzHJgNQCHZClGoLVWsd\noUF9GyQY6pQi/W3XAKtI9cWz9kUNzZqg3yQ07GciISWqi0OdN6U61niH3H3eus5T\nbTSU9RAofkh4Hjf6xg8FVnn4uNeLXvUTssCltVoV3VRakYnE+RtE5pp0n5Cg5Y11\nCo0n9XGBMBsGlERKgKqrM57LA1CizMOY4VRfyxa4QR8D+Wuh06jm/FzAxC+ycgk9\nx2UcaPPvAgMBAAECggEALaANvaMbakmiUi7O4GmlA4AatXBRXJiYD5PZ+tcndbQx\nI6qwwG3ySWLYKjW0+kfJb3szwEfPeHTzTdLHhbUQ4AHCbRA8cMe4cvcUdPGEPP6/\ncxdAoLKmk6wH9JxNrtvxlu93K8PqzPnaiz86NE53QDTEsrRL8DLPVA8q3YVnH+J3\n+x1BF//j+rvoe8Pb9HoBKY/1qVjbHHA261fo3vokpvLN0sR44I5gT10BrfZDlBGU\nGw5c3HKsxPrOj/m1OqBRpPuZWHQGH0yPc8NJThusNu7tNdn224aAlrXVsLwm52qI\nkrhD/tOXhYQEnM/oGoQ2Z6JrRGBxsopE3+cThOcRiQKBgQDgNZ4Fa062RA/b0YaT\n06CVSluLMgPF20IPx9X5m1oriZyLTigImrVzGpg2YKlvIRyn8H2QX/WFCUvTvCga\niXqQQBX7Q82UnmtBhf4IDGgxZYgiAQd3DO+SkFHfXnCc15JT3tPQF3b9FYECzunR\npO/hOHYQNzaV1Kb9Q+3cjUlx+QKBgQDB3ivmm0InMBI3NYSkvBBvYwzQoqEso0yA\n8d/AUpPEpUkvnGfLkLc/AkfrYp+xLm46m8MCt4kVYvstTBB3Z4wd0Gne/8hF0qCT\nWSn4cakkTg2Y6F9E/MVnMlD0oLJtRIYqfAFAd5Q9FuJbYvfDLc8Hpy+jrle4KUh8\nZMh0L6MPJwKBgQCQMkuYBqSP2oQshru7tR6RBUqM4jTE+jepeIdoSf6bA5z3huN+\nbSmHhrIgPtiZjT0l0SigQubfkdP/sAJG1uZJgb3hZIECNUSb1nZDbN9R7Y+49tp7\nOYmWxFSziMR6SrZkVGn7aivvpvXa/YIpf597RNnBohDsGeDv/9EpyIBU2QKBgGeh\nMyZZ58q6z4HjgbvtK3vfHoKH7E/IGqTypgBQI90B3VUt7e3KtalgtsEEPwifIR0D\nFgLlyMk917Ym6sZo+2UUewNRBuUL6fnZt62uVBOsBWivDf36gCrhopShMb9m2bDs\nCF9FjF/7U5Q2GuqiGgClRbng/9LZfn3AAcbZj/gRAoGAPERzTbyeprX9wl6x4zej\nUXpVrahTZLEeNRL+PdX15CWLrBkieq6PxnqdTweR58GWztkLDs05g5Ym7u5vvsOx\nEed5yMtpW63haTY13M9OsVagldVlgDfnqoA/5DysprfbuOMSBjTvfgMlvMIeRfsQ\n9NdY2ZWnfr0cRMNdQo438Fk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-ybng6@tienda-de-daniel.iam.gserviceaccount.com",
+  "client_id": "116253842270027198298",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-ybng6%40tienda-de-daniel.iam.gserviceaccount.com"
+}

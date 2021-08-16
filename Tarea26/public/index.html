@@ -18,34 +18,34 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Tienda Coderhouse</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Tienda Coderhouse</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">      
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown logged">
-                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a data-toggle="modal" data-target="#modalCreacionProducto">Crear un Producto</a></li>
-                    <li><a data-toggle="modal" data-target="#modalEnviarMensaje">Enviar un Mensaje</a></li>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown logged">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a data-toggle="modal" data-target="#modalCreacionProducto">Crear un Producto</a></li>
+                            <li><a data-toggle="modal" data-target="#modalEnviarMensaje">Enviar un Mensaje</a></li>
+                        </ul>
+                    </li>
+                    <li><a data-toggle="collapse" href="#navCarrito"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
+                    <li class="unlogged"><a href="" data-toggle="modal" data-target="#modalLogin">Login</a></li>
+                    <li class="logged"><a href="javascript:void(0)" onclick="logout()">Log out</a></li>
                 </ul>
-                </li>
-                <li><a data-toggle="collapse" href="#navCarrito"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
-                <li class="unlogged"><a href="" data-toggle="modal" data-target="#modalLogin">Login</a></li>
-                <li class="logged"><a href="javascript:void(0)" onclick="logout()">Log out</a></li>
-            </ul>
             </div>
         </div>
     </nav>    
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="col-12 text-center logged">
-               <h1>Hola <span id="nombreUsuario"></span></h1> 
+                <h1>Hola <span id="nombreUsuario"></span></h1> 
             </div>
             <div class="col-md-10">
                 <h3>Productos</h3>
@@ -78,93 +78,132 @@
     <div class="modal fade" id="modalCreacionProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <form id="formCreacionProducto" class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Creación de Producto</h4>
-            </div>
-            <div class="modal-body container-fluid">
-                <div class="form-group col-md-12">
-                    <label class="" for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="title" placeholder="">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Creación de Producto</h4>
                 </div>
-                <div class="form-group col-md-12">
-                    <label class="" for="description">Descripción</label>
-                    <textarea class="form-control" name="description" id="description"  rows="4"></textarea>
+                <div class="modal-body container-fluid">
+                    <div class="form-group col-md-12">
+                        <label class="" for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="title" placeholder="">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="" for="description">Descripción</label>
+                        <textarea class="form-control" name="description" id="description"  rows="4"></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="" for="precio">Precio</label>
+                        <input type="number" class="form-control" id="precio" name="price" placeholder="">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="" for="stock">Disponibles</label>
+                        <input type="number" class="form-control" id="stock" name="stock" placeholder="">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="" for="thumbnail">Thumbnail</label>
+                        <input type="text" class="form-control" id="thumbnail" name="thumbnail" value="https://picsum.photos/200" placeholder="">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <hr>
+                        <div id="alertaProductos" class="alert"></div>
+                    </div>
                 </div>
-                <div class="form-group col-md-12">
-                    <label class="" for="precio">Precio</label>
-                    <input type="number" class="form-control" id="precio" name="price" placeholder="">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Crear Producto</button>
                 </div>
-                 <div class="form-group col-md-12">
-                    <label class="" for="stock">Disponibles</label>
-                    <input type="number" class="form-control" id="stock" name="stock" placeholder="">
-                </div>
-                <div class="form-group col-md-12">
-                    <label class="" for="thumbnail">Thumbnail</label>
-                    <input type="text" class="form-control" id="thumbnail" name="thumbnail" value="https://picsum.photos/200" placeholder="">
-                </div>
-                <div class="form-group col-md-12">
-                    <hr>
-                    <div id="alertaProductos" class="alert"></div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary">Crear Producto</button>
-            </div>
             </form>
         </div>
     </div>
     <div class="modal fade" id="modalEnviarMensaje" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <form id="formCreacionMensaje" class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Creación de Producto</h4>
-            </div>
-            <div class="modal-body container-fluid">
-                <div class="form-group col-md-12">
-                    <label class="" for="email-chat">Email</label>
-                    <input type="text" class="form-control" id="email-chat" name="email" placeholder="">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Creación de Producto</h4>
                 </div>
-                <div class="form-group col-md-12">
-                    <label class="" for="mensaje-chat">Mensaje</label>
-                    <input type="text" class="form-control" id="mensaje-chat" name="mensaje" placeholder="Ingrese acá su mensaje.">
+                <div class="modal-body container-fluid">
+                    <div class="form-group col-md-12">
+                        <label class="" for="email-chat">Email</label>
+                        <input type="text" class="form-control" id="email-chat" name="email" placeholder="">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="" for="mensaje-chat">Mensaje</label>
+                        <input type="text" class="form-control" id="mensaje-chat" name="mensaje" placeholder="Ingrese acá su mensaje.">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <hr>
+                        <div id="alertaMensajes" class="alert"></div>
+                    </div>
                 </div>
-                <div class="form-group col-md-12">
-                    <hr>
-                    <div id="alertaMensajes" class="alert"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary">Enviar</button>
-            </div>
             </form>
         </div>
     </div>
     <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
-            <form id="formLogin" class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Ingresa tu nombre</h4>
+            <div id="formLogin" class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body container-fluid">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tab-login" data-toggle="tab">Login</a></li>
+                        <li role="presentation"><a href="#tab-register" data-toggle="tab">Register</a></li>
+                    </ul>                
+                    <div class="tab-content row-fluid">
+                        <div role="tabpanel" class="tab-pane active col-md-12" id="tab-login">
+                            <h4 class="text-center">Ingresa a tu cuenta</h4>
+                            <br>
+                            <form id="formLogin" class="form" role="form" action="/login" method="post" autocomplete="off">
+                                <div class="form-group">
+                                    <label for="">Email</label>
+                                    <input name='username' placeholder="Email" class="form-control" type="text" value="danielsierra34@gmail.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Password</label>
+                                    <input name='password' placeholder="Password" class="form-control" type="password" value="1234567890" required>
+                                </div>
+                                <div id="alertaLogin"></div>
+                                <div class="form-group text-right">
+                                    <input class="btn btn-success my-3" type="submit" value="Login">
+                                </div>
+                            </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane col-md-12" id="tab-register">
+                            <h4 class="text-center">Crea una cuenta</h4>
+                            <br>
+                            <form id="formRegister">      
+                                <div class="form-group">
+                                    <label for="">Nombre</label>
+                                    <input name='firstName' placeholder="firstname" class="form-control" type="text" value="Beatriz" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Apellido</label>
+                                    <input name='lastName' placeholder="lastname" class="form-control" type="text" value="Rincón" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Email</label>
+                                    <input name='username' placeholder="email" class="form-control" type="email" value="rinconmoralesb@gmail.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Password</label>
+                                    <input name='password' placeholder="Password" class="form-control" type="password" value="1234567890" required>
+                                </div>
+                                <div id="alertaRegister"></div>
+                                <div class="form-group text-right">
+                                    <input class="btn btn-success my-3" type="submit" value="Register">
+                                </div>
+                            </form>
+                            
+                        </div>
+                    </div>              
+                </div>
             </div>
-            <div class="modal-body container-fluid">
-                <div class="form-group col-md-12">
-                    <label class="" for="nombre-login">Nombre</label>
-                    <input type="text" class="form-control" id="nombre-login" name="nombre" placeholder="">
-                </div> 
-                <div class="form-group col-md-12">
-                    <hr>
-                    <div id="alertaLogin" class="alert"></div>
-                </div>              
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary">Log in</button>
-            </div>
-            </form>
         </div>
     </div>
 </body>

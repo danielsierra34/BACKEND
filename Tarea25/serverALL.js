@@ -3,6 +3,8 @@ const cookieParser = require('cookie-parser');
 const handlebars = require('express-handlebars')
 const config = require('./config/config.json');
 
+//const bodyParser = require('body-parser');
+
 let storageFactory = require('./storage.factory');
 let storageConfig = storageFactory.getStorage(config.STORAGE);
 
@@ -18,6 +20,7 @@ console.log(global.persistencia)
 const app = express();
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -30,6 +33,7 @@ app.engine('hbs',handlebars({
 }))
 app.set('view engine', 'hbs')
 app.set('views', __dirname + '/views')
+
 app.use(storageConfig.getSession());
 
 const instanciaProductos = require('./api/productos');

@@ -56,28 +56,6 @@ formProducto.addEventListener('submit', e => {
     }
 });
 
-const formLogin = document.getElementById('formLogin');
-formLogin.addEventListener('submit', e => {
-    e.preventDefault();    
-    const data = new FormData(e.target);
-    const json = Object.fromEntries(data.entries());
-    const jsonx=JSON.parse(JSON.stringify(json))
-    
-    if(jsonx.nombre){
-        login(jsonx)
-    }else{
-        alerta.style.display = "block";
-        alerta.innerHTML = "Debes ingresar tu nombre"
-        alerta.className = '';
-        alerta.classList.add("alert");
-        alerta.classList.add("alert-danger");
-        setTimeout(function(){
-            alerta.style.display = "none";
-        },1500)
-    }
-});
-
-
 function removeFromCart(id){
     if ( window.confirm("Está seguro de eliminar este item de su carrito?")) {
         fetch(`/api/carrito/eliminar/${id}`, {
@@ -303,83 +281,138 @@ function messageTemplate(mensajes) {
     return html;
 }
 
-function checkStatus(){
-    console.log("checking Status")
-    fetch('status', {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        method: 'POST'
-    }).then(respuesta => respuesta.json()).then(status => {
-        if(status.status){
-            console.log(`${status.username} is logged`)
-            document.querySelectorAll('.logged').forEach(function(el) {
-                el.style.display = 'block';
-             });
-             document.querySelectorAll('.unlogged').forEach(function(el) {
-                el.style.display = 'none';
-             });
-             document.getElementById("nombreUsuario").innerHTML = status.username
-        }else{
-            console.log("nobody is logged")
-            document.querySelectorAll('.logged').forEach(function(el) {
-                el.style.display = 'none';
-             });
-             document.querySelectorAll('.unlogged').forEach(function(el) {
-                el.style.display = 'block';
-             });
+const formLogin = document.getElementById('formLogin');
+    formLogin.addEventListener('submit', e => {
+        e.preventDefault();    
+        const data = new FormData(e.target);
+        const datax = data.entries();
+        const json = Object.fromEntries(data.entries());
+        const jsonx = JSON.stringify(json);        
+        const usp = new URLSearchParams();
+        for (const pair of new FormData(e.target)) {
+            usp.append(pair[0], pair[1]);
         }
-        setTimeout(() => {
-            checkStatus()
-        }, 5000);
-       
-    }).catch(error => {
-        console.log('ERROR', error);
+        console.log("usp",usp)
+        login(usp)
+        
     });
-}
- 
-function login(json){
-    fetch(`/login?username=${json.nombre}`, {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        method: 'POST'
-    }).then(respuesta => respuesta.json()).then(login => {
+    
+    function login(data){
         const alerta = document.getElementById("alertaLogin");
-        alerta.className = '';
-        alerta.classList.add("alert");
-        if(login.status){
-            alerta.innerHTML = `Hola ${login.username}, Bienvenido`
-            alerta.classList.add("alert-success");
+        fetch(`/login`, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': "application/x-www-form-urlencoded",
+            }
+        }).then(async respuesta => {
+            const resp= await respuesta.json()            
+            alerta.className = '';
+            alerta.classList.add("alert");
+            alerta.classList.add(`alert-${resp.alert}`);
+            alerta.innerHTML = resp.mensaje             
+            alerta.style.display = "block";
             setTimeout(function(){
-                location.reload();
+                if(resp.status){
+                    setTimeout(function(){
+                        location.reload();
+                    },800)
+                }
+                alerta.style.display = "none";
             },1500)
-        }else{
-            alerta.innerHTML = `usuario no valido`
-            alerta.classList.add("alert-danger");
+        }).catch(error => {
+            console.log('ERROR', error);
+        });
+    }
+    
+    const formRegister = document.getElementById('formRegister');
+    formRegister.addEventListener('submit', e => {
+        e.preventDefault();    
+        const data = new FormData(e.target);
+        const datax = data.entries();
+        const json = Object.fromEntries(data.entries());
+        const jsonx = JSON.stringify(json);        
+        const usp = new URLSearchParams();
+        for (const pair of new FormData(e.target)) {
+            usp.append(pair[0], pair[1]);
         }
-        alerta.style.display = "block";
-        setTimeout(function(){
-            alerta.style.display = "none";
-        },1500)
-       
-    }).catch(error => {
-        alert("error")
-        console.log('ERROR', error);
+        console.log("usp",usp)
+        register(usp)
+        
     });
-}
-function logout(){
+    
+    function register(data){ 
+        const alerta = document.getElementById("alertaRegister");
+        fetch(`/register`, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': "application/x-www-form-urlencoded",
+            }
+        }).then(async respuesta => {
+            const resp= await respuesta.json()            
+            alerta.className = '';
+            alerta.classList.add("alert");
+            alerta.classList.add(`alert-${resp.alert}`);
+            alerta.innerHTML = resp.mensaje             
+            alerta.style.display = "block";
+            setTimeout(function(){
+                if(resp.status){
+                    setTimeout(function(){
+                        location.reload();
+                    },1500)
+                }
+                alerta.style.display = "none";
+            },1500)
+        }).catch(error => {
+            console.log('ERROR', error);
+        });
+    }
+    
+    function checkStatus(){
+        console.log("checking Status")
+        fetch('/status', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        }).then(respuesta => respuesta.json()).then(status => {
+            console.log(status)
+            if(status.status){
+                console.log(`${status.user.firstName} is logged`)
+                document.querySelectorAll('.logged').forEach(function(el) {
+                    el.style.display = 'block';
+                });
+                document.querySelectorAll('.unlogged').forEach(function(el) {
+                    el.style.display = 'none';
+                });
+                document.getElementById("nombreUsuario").innerHTML = status.user.firstName
+            }else{
+                console.log("nobody is loggedw")
+                document.querySelectorAll('.logged').forEach(function(el) {
+                    el.style.display = 'none';
+                });
+                document.querySelectorAll('.unlogged').forEach(function(el) {
+                    el.style.display = 'block';
+                });
+            }
+            setTimeout(() => {
+                checkStatus()
+            }, 5000);
+            
+        }).catch(error => {
+            console.log('ERROR', error);
+        });
+    }
+
+    function logout(){
     fetch(`/logout`, {
         headers: {
             'Content-Type': 'application/json'
         },
         method: 'POST'
     }).then(respuesta => respuesta.json()).then(logout => {
-        if(logout.status){
             location.reload();
-        }else{
-
-        }
         
     }).catch(error => {
         alert("error")

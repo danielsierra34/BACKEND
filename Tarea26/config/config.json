@@ -1,4 +1,6 @@
 {
     "PORT": 8080,
-    "STORAGE": "mongo-atlas"
+    "STORAGE": "mongo-atlas",
+    "TIEMPO_EXPIRACION": 20000,
+    "URL_BASE_DE_DATOS":"mongodb://localhost:27017/passport"
 }

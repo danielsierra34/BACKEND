@@ -1,0 +1,6 @@
+{
+    "PORT": 8080,
+    "STORAGE": "mongo-atlas",
+    "TIEMPO_EXPIRACION": 20000,
+    "URL_BASE_DE_DATOS":"mongodb+srv://daniel:carraspunchis@cluster0.igji0.gcp.mongodb.net/passport"
+}
